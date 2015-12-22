@@ -1,0 +1,18 @@
+
+#registration_form {
+    width: 360px;
+    height: 120px;
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 10px;
+    border: 2px solid #4545F5;
+}
+
+label {
+    width: 175px;
+}
+
+button {
+    margin-left: 175px;
+}

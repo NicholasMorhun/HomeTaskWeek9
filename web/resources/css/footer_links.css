@@ -1,0 +1,11 @@
+
+.footer_invitation {
+    color: aquamarine;
+    margin: 0px auto;
+    text-align: center;
+    text-shadow: 2px 2px 5px rgba(50, 250, 50, 1);
+}
+
+a {
+    color: aquamarine;
+}
