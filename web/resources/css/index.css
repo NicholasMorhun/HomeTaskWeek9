@@ -1,0 +1,11 @@
+
+#main_text {
+    margin: 0 auto;
+    padding: 50px;
+    width: 550px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: #ccc;
+    text-shadow: 4px 4px 5px rgba(43, 45, 123, 1);
+}
