@@ -4,6 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>com.geekhub.hw8.filters.AccessFilter</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/storage/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

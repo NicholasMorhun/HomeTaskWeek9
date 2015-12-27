@@ -5,6 +5,6 @@
 <script src="/resources/scripts/error_message.js"></script>
 
 <div id="error_message_window">
-    <img id="close_error_message_button" src="/resources/images/close-md.png">
+    <img id="close_error_message_button" src="/resources/images/pictograms/close-md.png">
     <p id="error_message_text">${errMsg}</p>
 </div>

@@ -10,7 +10,7 @@
     <%@ include file="/WEB-INF/snippets/enter_header.html"%>
     <div id="main_text">
       <p>
-        Cloud Pocket is service for store you files.
+        Cloud Pocket is service for store your files.
         Access your files from everywhere!
       </p>
     </div>

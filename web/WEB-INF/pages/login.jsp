@@ -16,10 +16,10 @@
   <%@ include file="/WEB-INF/snippets/enter_header.html" %>
 
   <div id="login_form">
-    <form action="login" method="post">
+    <form action="/login" method="post">
       <div class="input_row">
         <label for="login">Login:</label>
-        <input type="text" id="login" name="login"/>
+        <input type="text" id="login" name="login" value="${oldLogin}"/>
       </div>
       <div class="input_row">
         <label for="password">Password:</label>

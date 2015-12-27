@@ -2,6 +2,7 @@ package com.geekhub.hw8.servlets;
 
 import com.geekhub.hw8.beans.CloudPocketUser;
 import com.geekhub.hw8.dao.UserDao;
+import com.geekhub.hw8.keys.CookiesKeys;
 import com.geekhub.hw8.utils.Utils;
 
 import javax.servlet.ServletException;
@@ -28,10 +29,15 @@ public class LoginServlet extends HttpServlet {
 
         CloudPocketUser user = UserDao.getInstance().getUserByLogin(userLogin);
         if (user != null && user.getPasswordMd5().equals(userPasswordMd)) {
-            Cookie loginCookie = new Cookie("userLogin", userPasswordMd);
+            Cookie loginCookie = new Cookie(CookiesKeys.USER_LOGIN, userLogin);
             resp.addCookie(loginCookie);
+
+            Cookie userTokenCookie = new Cookie(CookiesKeys.USER_TOKEN, userPasswordMd);
+            resp.addCookie(userTokenCookie);
+
             resp.sendRedirect("/storage/");
         } else {
+            req.setAttribute("oldLogin", userLogin);
             req.setAttribute("errMsg", "Wrong login or password");
             doGet(req, resp);
         }
