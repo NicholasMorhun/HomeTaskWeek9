@@ -1,0 +1,7 @@
+
+.error_text_header {
+    font-size: 36px;
+    text-align: center;
+    color: firebrick;
+    text-shadow: 3px 3px 7px rgb(250, 25, 43);
+}

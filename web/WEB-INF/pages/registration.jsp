@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Cloud pocket registration</title>
+  <link rel="icon" type="image/png" href="/resources/images/favlogo.png" sizes="32x32">
 
   <link rel="stylesheet" type="text/css" href="/resources/css/parent.css">
   <link rel="stylesheet" type="text/css" href="/resources/css/forms.css">

@@ -5,13 +5,37 @@
          version="3.1">
 
     <filter>
+        <filter-name>RedirectLoginnedUserFilter</filter-name>
+        <filter-class>com.geekhub.hw8.filters.RedirectLoginnedUserFilter</filter-class>
+    </filter>
+    <filter>
         <filter-name>AccessFilter</filter-name>
         <filter-class>com.geekhub.hw8.filters.AccessFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>AccountDirectoryFilter</filter-name>
+        <filter-class>com.geekhub.hw8.filters.AccountDirectoriesFilter</filter-class>
+    </filter>
 
+    <filter-mapping>
+        <filter-name>RedirectLoginnedUserFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/index.jsp</url-pattern>
+        <url-pattern>/storage/</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>AccessFilter</filter-name>
         <url-pattern>/storage/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountDirectoryFilter</filter-name>
+        <url-pattern>/storage/*</url-pattern>
+    </filter-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404</location>
+    </error-page>
 
 </web-app>

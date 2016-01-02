@@ -2,8 +2,10 @@ package com.geekhub.hw8.dao;
 
 import com.geekhub.hw8.beans.CloudPocketUser;
 import com.geekhub.hw8.utils.Utils;
+import com.mysql.jdbc.JDBC4Connection;
 
 import java.sql.*;
+import java.util.Properties;
 
 import static com.geekhub.hw8.dao.DBInfo.*;
 

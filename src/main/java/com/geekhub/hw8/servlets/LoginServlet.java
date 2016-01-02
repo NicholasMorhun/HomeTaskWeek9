@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
             Cookie userTokenCookie = new Cookie(CookiesKeys.USER_TOKEN, userPasswordMd);
             resp.addCookie(userTokenCookie);
 
-            resp.sendRedirect("/storage/");
+            resp.sendRedirect("/storage/" + userLogin + "/");
         } else {
             req.setAttribute("oldLogin", userLogin);
             req.setAttribute("errMsg", "Wrong login or password");
