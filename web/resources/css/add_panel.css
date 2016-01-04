@@ -1,0 +1,12 @@
+
+#add_panel {
+    text-align: center;
+    margin: 30px auto 0;
+}
+
+.add_button {
+    width: 48px;
+    height: 48px;
+    margin-left: 10px;
+    cursor: pointer;
+}

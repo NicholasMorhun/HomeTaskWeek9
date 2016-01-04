@@ -1,0 +1,48 @@
+
+#path_widget {
+    width: 750px;
+    height: 30px;
+    text-align: center;
+    margin: 0 auto 20px;
+    background-color: #aaaaff;
+    border-radius: 8px;
+}
+
+.logoico {
+    padding-left: 10px;
+    float: left;
+}
+
+#location_label {
+    float: left;
+    padding-left: 10px;
+    height: 30px;
+    line-height: 30px;
+    color: #4545F5;
+    text-shadow: 0px 0px 4px rgba(69, 69, 245, 1);
+    text-align: left;
+    font-family: serif;
+}
+
+.path_input {
+    width: 550px;
+    height: 20px;
+    margin-top: 2px;
+    background-color: #FFFFFF;
+    color: #0030FF;
+    background-color: rgba(200, 200, 200, 0.8);
+    font-family: serif;
+    font-size: 14px;
+}
+.path_input:focus {
+}
+
+.path_input:hover {
+    background-color: rgba(200, 200, 200, 0.7);
+}
+
+#change_path_button_img {
+    float: right;
+    margin-right: 2px;
+    cursor: pointer;
+}

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URLDecoder;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +20,9 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 
@@ -39,10 +44,7 @@ public class ViewContentServlet extends HttpServlet {
 
         String userRootDir = "/storage/" + userLogin;
 
-        String currentPath = req.getRequestURI().substring(userRootDir.length());
-        if (currentPath.endsWith("/")) {
-            currentPath = currentPath.substring(0, currentPath.length() - 1);
-        }
+        String currentPath = getCurrentPath(req);
 
         String backDir = "";
         int lastIndexOfSlash = currentPath.lastIndexOf("/");
@@ -51,6 +53,11 @@ public class ViewContentServlet extends HttpServlet {
         }
 
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
+        if (! Files.exists(absolutePath)) {
+            req.getRequestDispatcher("/WEB-INF/pages/errors/notFound.jsp").forward(req, resp);
+        }
+
+        session.setAttribute(SessionKeys.LAST_PATH, userRootDir + currentPath + "/");
 
         List<FileInstance> files = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(absolutePath)) {
@@ -82,6 +89,69 @@ public class ViewContentServlet extends HttpServlet {
 
     private void showFile(HttpServletRequest req, HttpServletResponse resp) {
         resp.setStatus(404); // TODO implement it
+    }
+
+    // ===============================================================================================
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userLogin = getUserLogin(req);
+        Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + getCurrentPath(req));
+
+        Map<String,String> parameters = parseParametersFromRequest(req);
+
+        switch (parameters.get("type")) {
+            case "folder": {
+                Path newDirectoryPath = absolutePath.resolve(parameters.get("name"));
+                if (! Files.exists(newDirectoryPath)) {
+                    try {
+                        Files.createDirectory(newDirectoryPath);
+                    } catch (IOException e) {
+                        resp.sendError(409);
+                    }
+                }
+                break;
+            }
+            default:
+                // resp.sendError(); // TODO
+
+        }
+    }
+
+    // ===============================================================================================
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
+    // ===============================================================================================
+
+    private String getUserLogin(HttpServletRequest req) {
+        HttpSession session = req.getSession();
+        return (String) session.getAttribute(SessionKeys.USER_LOGIN);
+    }
+
+    private String getCurrentPath(HttpServletRequest req) {
+        String userRootDir = "/storage/" + getUserLogin(req);
+        String currentPath = req.getRequestURI().substring(userRootDir.length());
+        if (currentPath.endsWith("/")) {
+            currentPath = currentPath.substring(0, currentPath.length() - 1);
+        }
+        return currentPath;
+    }
+
+    private Map<String,String> parseParametersFromRequest(HttpServletRequest req) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(req.getInputStream()));
+        String data = bufferedReader.readLine();
+
+        Map<String, String> queryPairs = new LinkedHashMap<>();
+        String[] pairs = data.split("&");
+        for (String pair : pairs) {
+            int idx = pair.indexOf("=");
+            queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF-8"), URLDecoder.decode(pair.substring(idx + 1), "UTF-8"));
+        }
+        return queryPairs;
     }
 
 }

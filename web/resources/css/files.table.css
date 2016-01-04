@@ -1,0 +1,68 @@
+
+#filesExplorer {
+    text-align: center;
+    margin: 0 auto;
+    box-shadow: 5px 5px 10px #aaf;
+}
+
+table {
+    width: 750px;
+    border-spacing: 0;
+}
+th {
+    height: 26px;
+    background: #44f;
+    color: #fff;
+    border-bottom: double;
+}
+tr:nth-child(2n) {
+    background-color: #f0f0f0;
+}
+tr:nth-child(2n+1) {
+    background-color: #d8d8d8;
+}
+tr:hover {
+    background-color: #8888ff;
+}
+
+.fileico {
+    width: 48px;
+    height: 48px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.type_image_cell {
+    width: 48px;
+}
+
+.filename_cell {
+    text-align: left;
+}
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+.filesize_cell {
+    width: 150px;
+    text-align: right;
+}
+
+.creation_date_cell {
+    width: 150px;
+    text-align: center;
+}
+
+
+.control_button_cell {
+    width: 48px;
+}
+.control_button_img {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+}

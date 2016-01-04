@@ -6,4 +6,6 @@ package com.geekhub.hw8.keys;
 public interface SessionKeys {
     String USER_LOGIN = "userLogin";
     String USER_TOKEN = "userToken";
+
+    String LAST_PATH = "lastPath";
 }
