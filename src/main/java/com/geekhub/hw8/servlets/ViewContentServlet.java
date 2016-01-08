@@ -3,14 +3,12 @@ package com.geekhub.hw8.servlets;
 import com.geekhub.hw8.keys.SessionKeys;
 import com.geekhub.hw8.storage.FileInstance;
 
-import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -19,7 +17,6 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,7 @@ import java.util.Map;
 import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/storage/*")
+@MultipartConfig
 public class ViewContentServlet extends HttpServlet {
 
     @Override
@@ -101,9 +99,9 @@ public class ViewContentServlet extends HttpServlet {
         Map<String,String> parameters = parseParametersFromRequest(req);
 
         switch (parameters.get("type")) {
-            case "folder": {
+            case "folder":
                 Path newDirectoryPath = absolutePath.resolve(parameters.get("name"));
-                if (! Files.exists(newDirectoryPath)) {
+                if (!Files.exists(newDirectoryPath)) {
                     try {
                         Files.createDirectory(newDirectoryPath);
                     } catch (IOException e) {
@@ -111,10 +109,15 @@ public class ViewContentServlet extends HttpServlet {
                     }
                 }
                 break;
-            }
+            case "file":
+                String fileName = parameters.get("name");
+                File uploadingFile = new File(absolutePath.toString(), fileName);
+                Part filePart = req.getPart("file");
+                InputStream in = filePart.getInputStream();
+                Files.copy(in, uploadingFile.toPath());
+                break;
             default:
                 // resp.sendError(); // TODO
-
         }
     }
 
@@ -122,7 +125,21 @@ public class ViewContentServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String userLogin = getUserLogin(req);
+        Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + getCurrentPath(req));
+        Map<String,String> parameters = parseParametersFromRequest(req);
+        String itemNameForDelete = parameters.get("name");
+        Path itemPath = absolutePath.resolve(itemNameForDelete);
+        delete(itemPath.toFile());
+    }
 
+    private void delete(File f) throws IOException {
+        if (f.isDirectory()) {
+            for (File c : f.listFiles())
+                delete(c);
+        }
+        if (!f.delete())
+            throw new IOException("Failed to delete file: " + f);
     }
 
     // ===============================================================================================

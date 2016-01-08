@@ -16,6 +16,8 @@ $(document).ready(function() {
 
     $("#path").keyup(function(event){
         if(event.keyCode == 13) {
+            event.stopPropagation();
+            event.preventDefault();
             submitPath(); // TODO verify
         }
     });

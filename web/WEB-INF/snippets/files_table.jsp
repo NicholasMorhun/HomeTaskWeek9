@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <link rel="stylesheet" type="text/css" href="/resources/css/files.table.css">
-<script src="/resources/scripts/files.table.js"></script>
+<script src="/resources/scripts/files_table.js"></script>
 
 <div>
   <table id="filesExplorer">
@@ -18,7 +18,7 @@
       </tr>
     </c:if>
     <c:forEach items="${files}" var="fileItem">
-      <tr>
+      <tr id="${fileItem.fileName}">
         <td class="type_image_cell"><img class="fileico" src="/resources/images/fileico/${fileItem.fileExtension}.png"></td>
         <td class="filename_cell"><a href="${userRootDir}${currentPath}/${fileItem.fileName}<c:if test="${fileItem.isDirectory}">/</c:if>">${fileItem.fileName}</a></td>
         <td class="filesize_cell">${fileItem.fileSize}</td>
