@@ -25,7 +25,7 @@ import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/storage/*")
 @MultipartConfig
-public class ViewContentServlet extends HttpServlet {
+public class ViewDirectoryContentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

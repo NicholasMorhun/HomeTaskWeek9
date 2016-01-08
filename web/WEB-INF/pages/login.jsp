@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <head>
@@ -9,10 +10,17 @@
   <link rel="stylesheet" type="text/css" href="/resources/css/footer_links.css">
   <link rel="stylesheet" type="text/css" href="/resources/css/login.css">
 
-  <script src="/resources/lib/jquery-2.1.4.min.js"></script>
 </head>
 <body>
- <jsp:include page="/WEB-INF/snippets/error_message.jsp" />
+  <c:if test="${not empty errMsg}">
+    <script src="/resources/scripts/lib/jquery-2.1.4.min.js"></script>
+    <%@ include file="/WEB-INF/snippets/error_notification.html" %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        showError('${errMsg}');
+      });
+    </script>
+  </c:if>
 
   <%@ include file="/WEB-INF/snippets/enter_header.html" %>
 
