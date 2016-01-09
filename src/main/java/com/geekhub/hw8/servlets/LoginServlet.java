@@ -30,9 +30,11 @@ public class LoginServlet extends HttpServlet {
         CloudPocketUser user = UserDao.getInstance().getUserByLogin(userLogin);
         if (user != null && user.getPasswordMd5().equals(userPasswordMd)) {
             Cookie loginCookie = new Cookie(CookiesKeys.USER_LOGIN, userLogin);
+            loginCookie.setMaxAge(60*60*24 * 30);
             resp.addCookie(loginCookie);
 
             Cookie userTokenCookie = new Cookie(CookiesKeys.USER_TOKEN, userPasswordMd);
+            userTokenCookie.setMaxAge(60*60*24 * 30);
             resp.addCookie(userTokenCookie);
 
             resp.sendRedirect("/storage/" + userLogin + "/");

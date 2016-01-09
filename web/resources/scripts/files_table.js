@@ -6,9 +6,9 @@ $(document).ready(function() {
         var confirmation = confirm("You want to delete '" + itemId + "'. Are you sure?");
         if (confirmation) {
             $.ajax({
-                url: document.URL,
-                type: 'DELETE',
-                data: 'name=' + itemId,
+                url: document.URL.replace("storage", "delete"),
+                type: 'post',
+                data: {'name': itemId},
                 success: function() {
                     $('#' + itemId).fadeOut();
                 },
