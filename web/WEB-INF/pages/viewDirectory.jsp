@@ -16,6 +16,6 @@
 
     <jsp:include page="/WEB-INF/snippets/files_table.jsp" />
 
-    <%@include file="/WEB-INF/snippets/add.html" %>
+    <%@include file="/WEB-INF/snippets/upload_item.html" %>
 </body>
 </html>

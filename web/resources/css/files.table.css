@@ -14,6 +14,7 @@ th {
     background: #44f;
     color: #fff;
     border-bottom: double;
+    cursor: pointer;
 }
 tr:nth-child(2n) {
     background-color: #f0f0f0;
@@ -23,6 +24,9 @@ tr:nth-child(2n+1) {
 }
 tr:hover {
     background-color: #8888ff;
+}
+.sort_by_it {
+    color: yellow;
 }
 
 .fileico {

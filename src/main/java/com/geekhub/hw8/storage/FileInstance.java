@@ -4,29 +4,31 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class FileInstance {
-    public static final DateFormat FILE_CREATION_DATE_TIME_FORMAT = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+    private static final DateFormat FILE_CREATION_DATE_TIME_FORMAT = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
 
     private String fileName;
     private String fileExtension;
     private long fileSize;
-    private String creationDate;
+    private long creationDate;
+    private String creationDateString;
     private boolean isDirectory;
 
-    public FileInstance(String fileName, boolean isDirectory, long fileSize, String creationDate) {
+    public FileInstance(String fileName, boolean isDirectory, long fileSize, Long creationDate) {
         this.fileName = fileName;
         this.isDirectory = isDirectory;
         this.fileSize = fileSize;
         this.creationDate = creationDate;
+        this.creationDateString = FILE_CREATION_DATE_TIME_FORMAT.format(creationDate);
 
-        int lastDotIndex = fileName.lastIndexOf(".");
-        if (lastDotIndex == -1) {
-            if (isDirectory) {
-                fileExtension = "folder";
-            } else {
-                fileExtension = "unknown";
-            }
+        if (isDirectory) {
+            fileExtension = "folder";
         } else {
-            fileExtension = fileName.substring(lastDotIndex + 1);
+            int lastDotIndex = fileName.lastIndexOf(".");
+            if (lastDotIndex == -1) {
+                fileExtension = "unknown";
+            } else {
+                fileExtension = fileName.substring(lastDotIndex + 1);
+            }
         }
     }
 
@@ -50,12 +52,20 @@ public class FileInstance {
         this.fileSize = fileSize;
     }
 
-    public String getCreationDate() {
+    public long getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(long creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getCreationDateString() {
+        return creationDateString;
+    }
+
+    public void setCreationDateString(String creationDateString) {
+        this.creationDateString = creationDateString;
     }
 
     public String getFileExtension() {

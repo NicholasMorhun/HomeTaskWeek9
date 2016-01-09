@@ -18,12 +18,73 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/storage/*")
 public class ViewDirectoryContentServlet extends HttpServlet {
+
+    private static final Comparator<FileInstance> comparatorByName = (o1, o2) -> {
+        if (o1.getIsDirectory() != o2.getIsDirectory()) {
+            if (o1.getIsDirectory()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            return o1.getFileName().compareTo(o2.getFileName());
+        }
+    };
+
+    private static final Comparator<FileInstance> comparatorBySize = (o1, o2) -> {
+        if (o1.getIsDirectory() != o2.getIsDirectory()) {
+            if (o1.getIsDirectory()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            if (o1.getIsDirectory()) {
+                return o1.getFileName().compareTo(o2.getFileName());
+            } else {
+                return Long.compare(o1.getFileSize(), o2.getFileSize());
+            }
+        }
+    };
+
+    private static final Comparator<FileInstance> comparatorByType = (o1, o2) -> {
+        if (o1.getIsDirectory() != o2.getIsDirectory()) {
+            if (o1.getIsDirectory()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            if (o1.getIsDirectory()) {
+                return o1.getFileName().compareTo(o2.getFileName());
+            } else {
+                return o2.getFileExtension().compareTo(o1.getFileExtension());
+            }
+        }
+    };
+
+    private static final Comparator<FileInstance> comparatorByDate = (o1, o2) -> {
+        if (o1.getIsDirectory() != o2.getIsDirectory()) {
+            if (o1.getIsDirectory()) {
+                return -1;
+            } else {
+                return 1;
+            }
+        } else {
+            return Long.compare(o2.getCreationDate(), o1.getCreationDate());
+        }
+    };
+
+    private static final String SORT_PARAMETER_NAME = "sort";
+    private static final String REVERSE_PARAMETER_NAME = "reverse";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,11 +127,23 @@ public class ViewDirectoryContentServlet extends HttpServlet {
             }
         }
 
+        String sortBy = req.getParameter(SORT_PARAMETER_NAME);
+        if (sortBy == null) {
+            sortBy = "Name";
+        }
+        Boolean reverseSortOrder = Boolean.valueOf(req.getParameter(REVERSE_PARAMETER_NAME));
+        if (reverseSortOrder == null) {
+            reverseSortOrder = false;
+        }
+        sortFiles(files, sortBy, reverseSortOrder);
+
         req.setAttribute("userLogin", userLogin);
         req.setAttribute("currentPath", currentPath);
         req.setAttribute("userRootDir", userRootDir);
         req.setAttribute("backDir", backDir);
         req.setAttribute("files", files);
+        req.setAttribute("sortBy", sortBy);
+        req.setAttribute("reverseOrder", reverseSortOrder);
         req.getRequestDispatcher("/WEB-INF/pages/viewDirectory.jsp").forward(req, resp);
     }
 
@@ -80,9 +153,31 @@ public class ViewDirectoryContentServlet extends HttpServlet {
         String name = directoryItem.getFileName().toString();
         boolean isDirectory = attrs.isDirectory();
         long size = Files.size(directoryItem);
-        String creationTime = FileInstance.FILE_CREATION_DATE_TIME_FORMAT.format(attrs.creationTime().toMillis());
+        long creationTime = attrs.creationTime().toMillis();
 
         return new FileInstance(name, isDirectory, size, creationTime);
+    }
+
+    private void sortFiles(List<FileInstance> files, String by, boolean reverse) {
+        switch (by) {
+            case "Name":
+                Collections.sort(files, comparatorByName);
+                break;
+            case "Size":
+                Collections.sort(files, comparatorBySize);
+                break;
+            case "Type":
+                Collections.sort(files, comparatorByType);
+                break;
+            case "Date":
+                Collections.sort(files, comparatorByDate);
+                break;
+            default:
+                Collections.sort(files, comparatorByName);
+        }
+        if (reverse) {
+            Collections.reverse(files);
+        }
     }
 
 }
