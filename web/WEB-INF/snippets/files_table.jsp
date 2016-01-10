@@ -28,8 +28,8 @@
         <td class="filename_cell"><a href="${userRootDir}${currentPath}/${fileItem.fileName}<c:if test="${fileItem.isDirectory}">/</c:if>?sort=${sortBy}&reverse=${reverseOrder}">${fileItem.fileName}</a></td>
         <td class="filesize_cell">${fileItem.fileSize}</td>
         <td class="creation_date_cell">${fileItem.creationDateString}</td>
-        <td class="control_button_cell"><img class="control_button_img" id="download_${fileItem.fileName}" src="/resources/images/pictograms/download.png" title="Download ${fileItem.fileName}"></td>
-        <td class="control_button_cell"><img class="control_button_img" id="delete_${fileItem.fileName}" src="/resources/images/pictograms/delete.png" title="Delete ${fileItem.fileName}"></td>
+        <td class="control_button_cell"><img class="control_button_img download_button" id="download_${fileItem.fileName}" src="/resources/images/pictograms/download.png" title="Download ${fileItem.fileName}"></td>
+        <td class="control_button_cell"><img class="control_button_img delete_button" id="delete_${fileItem.fileName}" src="/resources/images/pictograms/delete.png" title="Delete ${fileItem.fileName}"></td>
       </tr>
     </c:forEach>
   </table>

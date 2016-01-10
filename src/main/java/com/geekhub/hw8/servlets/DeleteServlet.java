@@ -23,7 +23,7 @@ import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 public class DeleteServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String userLogin = (String) session.getAttribute(SessionKeys.USER_LOGIN);
         String userRootDir = "/delete/" + userLogin;
@@ -32,6 +32,7 @@ public class DeleteServlet extends HttpServlet {
         String itemNameForDelete = req.getParameter("name");
         Path itemForDeletePath = absolutePath.resolve(itemNameForDelete);
         recursiveDelete(itemForDeletePath.toFile());
+        resp.sendRedirect(req.getRequestURI().replaceFirst("delete", "storage"));
     }
 
     private void recursiveDelete(File itemForDelete) throws IOException {

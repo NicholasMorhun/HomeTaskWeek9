@@ -29,19 +29,17 @@ $(document).ready(function() {
         var itemId = $(this).attr('id').substring(7);
         var confirmation = confirm("You want to delete '" + itemId + "'. Are you sure?");
         if (confirmation) {
-            $.ajax({
-                url: document.URL.replace("storage", "delete"),
-                type: 'post',
-                data: {'name': itemId},
-                success: function() {
-                    $('#' + itemId).fadeOut();
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    alert('Error. Item has not deleted');
-                }
-            });
+            var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "delete");
+            window.location.href = url + "?name=" + itemId;
         }
     };
-    $(".control_button_img").on("click", delete_item_function);
+    $(".delete_button").on("click", delete_item_function);
+
+    var download_item_function = function() {
+        var itemId = $(this).attr('id').substring(9);
+        var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "download") + itemId;
+        window.open(url, '_blank');
+    };
+    $(".download_button").on("click", download_item_function);
 
 });

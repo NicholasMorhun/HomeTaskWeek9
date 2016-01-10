@@ -50,7 +50,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
             if (o1.getIsDirectory()) {
                 return o1.getFileName().compareTo(o2.getFileName());
             } else {
-                return Long.compare(o1.getFileSize(), o2.getFileSize());
+                return Long.compare(o2.getFileSize(), o1.getFileSize());
             }
         }
     };
