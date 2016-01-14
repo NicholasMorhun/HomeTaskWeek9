@@ -35,6 +35,10 @@
     <filter-mapping>
         <filter-name>AccountDirectoryFilter</filter-name>
         <url-pattern>/storage/*</url-pattern>
+        <url-pattern>/download/*</url-pattern>
+        <url-pattern>/upload/*</url-pattern>
+        <url-pattern>/delete/*</url-pattern>
+        <url-pattern>/view/*</url-pattern>
     </filter-mapping>
 
     <error-page>
