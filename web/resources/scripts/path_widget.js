@@ -14,11 +14,11 @@ $(document).ready(function() {
 
     $("#change_path_button_img").on("click", submitPath);
 
-    $("#path").keyup(function(event){
+    $("#path").on("keypress", function(event) {
         if(event.keyCode == 13) {
             event.stopPropagation();
             event.preventDefault();
-            submitPath(); // TODO verify
+            submitPath();
         }
     });
 });

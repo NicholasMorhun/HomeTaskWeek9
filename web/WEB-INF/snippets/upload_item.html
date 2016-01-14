@@ -3,11 +3,13 @@
 <script src="/resources/scripts/upload_item.js"></script>
 
 <div id="add_panel">
-    <img id="add_folder_img" class="add_button" src="/resources/images/pictograms/add_folder.png" title="Add folder">
-    <img id="add_file_img" class="add_button" src="/resources/images/pictograms/add_file.png" title="Add file">
+    <img id="add_folder_img" class="add_button" src="/resources/images/pictograms/add_folder.png" title="Create a folder">
+    <img id="add_file_img" class="add_button" src="/resources/images/pictograms/add_file.png" title="Upload a file">
+    <img id="add_archive_img" class="add_button" src="/resources/images/pictograms/add_archive.png" title="Upload folders structure from zip archive">
 
-    <form name="upload_file" action="" method="" enctype="multipart/form-data" style="display: none">
+    <form id="upload_file_form" name="upload_file" action="" method="post" enctype="multipart/form-data" style="display: none">
         <input type="file" name="file" id="file_input">
+        <input type="hidden" name="type" id="type_hidden_input" value="">
     </form>
 
 </div>

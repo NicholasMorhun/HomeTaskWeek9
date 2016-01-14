@@ -27,7 +27,7 @@ public class FileInstance {
             if (lastDotIndex == -1) {
                 fileExtension = "unknown";
             } else {
-                fileExtension = fileName.substring(lastDotIndex + 1);
+                fileExtension = fileName.substring(lastDotIndex + 1).toLowerCase();
             }
         }
     }
