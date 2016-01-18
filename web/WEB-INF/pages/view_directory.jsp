@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title></title>
+    <title>${userLogin}: ${currentPath}</title>
     <link rel="icon" type="image/png" href="/resources/images/favlogo.png" sizes="32x32">
 
     <link rel="stylesheet" type="text/css" href="/resources/css/parent.css">
