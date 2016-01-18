@@ -3,15 +3,23 @@ package com.geekhub.hw8.servlets;
 import com.geekhub.hw8.beans.CloudPocketUser;
 import com.geekhub.hw8.dao.UserDao;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
+
+    private static final String WELCOME_FILE = "welcome.txt";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +48,7 @@ public class RegistrationServlet extends HttpServlet {
         CloudPocketUser user = userDao.getUserByLogin(userLogin);
         if (user == null) {
             userDao.addUser(userLogin, userPassword);
+            createUserHome(userLogin);
             req.setAttribute("login", userLogin);
             req.setAttribute("password", userPassword);
             req.getRequestDispatcher("/login").forward(req, resp);
@@ -47,6 +56,13 @@ public class RegistrationServlet extends HttpServlet {
             req.setAttribute("errMsg", "\"" + userLogin + "\"" + " already exists");
             doGet(req, resp);
         }
+    }
+
+    private void createUserHome(String userLogin) throws IOException {
+        Path pathToSandbox = Paths.get(PATH_TO_SANDBOX);
+        Path pathToUserHome = pathToSandbox.resolve(userLogin);
+        Files.createDirectory(pathToUserHome);
+        Files.copy(pathToSandbox.resolve(WELCOME_FILE), pathToUserHome.resolve(WELCOME_FILE));
     }
 
 }
