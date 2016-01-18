@@ -1,5 +1,10 @@
 package com.geekhub.hw8.storage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -70,6 +75,17 @@ public class FileInstance {
 
     public String getFileExtension() {
         return fileExtension;
+    }
+
+    public static FileInstance getFileDataFromPath(Path directoryItem) throws IOException {
+        BasicFileAttributes attrs = Files.readAttributes(directoryItem, BasicFileAttributes.class);
+
+        String name = directoryItem.getFileName().toString();
+        boolean isDirectory = attrs.isDirectory();
+        long size = Files.size(directoryItem);
+        long creationTime = attrs.creationTime().toMillis();
+
+        return new FileInstance(name, isDirectory, size, creationTime);
     }
 
 }

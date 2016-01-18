@@ -30,6 +30,7 @@ public class DownloadServlet extends HttpServlet {
         String userRootDir = "/download/" + userLogin;
         String currentPath = req.getRequestURI().substring(userRootDir.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
+        String fileName = getFileNameFromPath(absolutePath);
         if (!Files.exists(absolutePath)) {
             req.getRequestDispatcher("/error404").forward(req, resp);
         }
@@ -38,13 +39,22 @@ public class DownloadServlet extends HttpServlet {
 
         if (Files.isDirectory(absolutePath)) {
             resp.setContentType("application/zip");
-            resp.setHeader("Content-disposition", "attachment; filename=" + getFileNameFromPath(absolutePath) + ".zip");
+            resp.setHeader("Content-disposition", "attachment; filename=" + fileName + ".zip");
             processDownloadFolder(absolutePath, out);
         } else {
-            resp.setContentType("application/octet-stream");
+            String mimeType = getServletContext().getMimeType(fileName);
+            resp.setContentType(mimeType);
+
+            String inline = req.getParameter("inline");
+            boolean isInline = inline != null && inline.equals("true");
+            if (isInline) {
+                resp.setHeader("Content-disposition", "inline; filename=" + fileName);
+            } else {
+                resp.setHeader("Content-disposition", "attachment; filename=" + fileName);
+            }
+
             processDownloadFile(absolutePath, out);
         }
-
     }
 
     private String getFileNameFromPath(Path absolutePath) {

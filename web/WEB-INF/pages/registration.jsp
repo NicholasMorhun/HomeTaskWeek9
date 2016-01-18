@@ -10,11 +10,10 @@
   <link rel="stylesheet" type="text/css" href="/resources/css/footer_links.css">
   <link rel="stylesheet" type="text/css" href="/resources/css/registration.css">
 
-  <script src="/resources/lib/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 <c:if test="${not empty errMsg}">
-  <script src="/resources/scripts/lib/jquery-2.1.4.min.js"></script>
+  <script src="/resources/lib/jquery-2.1.4.min.js"></script>
   <%@ include file="/WEB-INF/snippets/error_notification.html" %>
   <script type="text/javascript">
     $(document).ready(function() {

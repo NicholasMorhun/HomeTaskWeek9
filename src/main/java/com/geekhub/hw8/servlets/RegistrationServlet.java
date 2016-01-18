@@ -34,7 +34,6 @@ public class RegistrationServlet extends HttpServlet {
             req.setAttribute("errMsg", "You may not use empty password");
             req.setAttribute("loginValue", userLogin);
             doGet(req, resp);
-            return;
         }
 
         UserDao userDao = UserDao.getInstance();

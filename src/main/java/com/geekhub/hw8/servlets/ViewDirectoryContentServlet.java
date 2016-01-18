@@ -15,7 +15,6 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -66,7 +65,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
             if (o1.getIsDirectory()) {
                 return o1.getFileName().compareTo(o2.getFileName());
             } else {
-                return o2.getFileExtension().compareTo(o1.getFileExtension());
+                return o1.getFileExtension().compareTo(o2.getFileExtension());
             }
         }
     };
@@ -92,7 +91,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
             showDirectory(req, resp);
         } else {
             String newUrl = req.getRequestURI().replaceFirst("storage", "view");
-            req.getRequestDispatcher(newUrl).forward(req, resp);
+            resp.sendRedirect(newUrl);
         }
     }
 
@@ -123,7 +122,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
         List<FileInstance> files = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(absolutePath)) {
             for (Path item : directoryStream) {
-                files.add(getFileDataFromPath(item));
+                files.add(FileInstance.getFileDataFromPath(item));
             }
         }
 
@@ -144,18 +143,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
         req.setAttribute("files", files);
         req.setAttribute("sortBy", sortBy);
         req.setAttribute("reverseOrder", reverseSortOrder);
-        req.getRequestDispatcher("/WEB-INF/pages/viewDirectory.jsp").forward(req, resp);
-    }
-
-    private FileInstance getFileDataFromPath(Path directoryItem) throws IOException {
-        BasicFileAttributes attrs = Files.readAttributes(directoryItem, BasicFileAttributes.class);
-
-        String name = directoryItem.getFileName().toString();
-        boolean isDirectory = attrs.isDirectory();
-        long size = Files.size(directoryItem);
-        long creationTime = attrs.creationTime().toMillis();
-
-        return new FileInstance(name, isDirectory, size, creationTime);
+        req.getRequestDispatcher("/WEB-INF/pages/view_directory.jsp").forward(req, resp);
     }
 
     private void sortFiles(List<FileInstance> files, String by, boolean reverse) {

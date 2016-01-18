@@ -33,7 +33,6 @@ public class AccessFilter implements Filter {
         if (userLoginFromCookie == null || userTokenFromCookie == null) {
             req.setAttribute("errMsg", "403 Forbidden. Login please");
             req.getRequestDispatcher("/WEB-INF/pages/login.jsp").forward(req, resp);
-            return;
         }
 
         String userLoginFromSession = (String) session.getAttribute(SessionKeys.USER_LOGIN);

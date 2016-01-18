@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="/resources/css/parent.css">
 
-    <script src="/resources/scripts/lib/jquery-2.1.4.min.js"></script>
+    <script src="/resources/lib/jquery-2.1.4.min.js"></script>
 </head>
 <body>
     <%@include file="/WEB-INF/snippets/logout.html" %>
