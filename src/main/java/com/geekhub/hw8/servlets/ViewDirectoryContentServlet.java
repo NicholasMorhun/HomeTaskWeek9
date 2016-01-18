@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -101,7 +102,7 @@ public class ViewDirectoryContentServlet extends HttpServlet {
 
         String userRootDir = "/storage/" + userLogin;
 
-        String currentPath = req.getRequestURI().substring(userRootDir.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDir.length());
         if (currentPath.endsWith("/")) {
             currentPath = currentPath.substring(0, currentPath.length() - 1);
         }

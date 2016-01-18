@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -27,7 +28,7 @@ public class DeleteServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String userLogin = (String) session.getAttribute(SessionKeys.USER_LOGIN);
         String userRootDir = "/delete/" + userLogin;
-        String currentPath = req.getRequestURI().substring(userRootDir.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDir.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
         String itemNameForDelete = req.getParameter("name");
         Path itemForDeletePath = absolutePath.resolve(itemNameForDelete);

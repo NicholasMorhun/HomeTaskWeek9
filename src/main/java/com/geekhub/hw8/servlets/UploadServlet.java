@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.*;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,7 +30,7 @@ public class UploadServlet extends HttpServlet {
         String userLogin = (String) session.getAttribute(SessionKeys.USER_LOGIN);
 
         String userRootDirPrefix = "/upload/" + userLogin;
-        String currentPath = req.getRequestURI().substring(userRootDirPrefix.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDirPrefix.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
 
         String folderName = req.getParameter("name");
@@ -57,7 +58,7 @@ public class UploadServlet extends HttpServlet {
         String fileName = filePart.getSubmittedFileName();
 
         String userRootDirPrefix = "/upload/" + userLogin;
-        String currentPath = req.getRequestURI().substring(userRootDirPrefix.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDirPrefix.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
         Path fileAbsolutePath  = absolutePath.resolve(fileName);
 

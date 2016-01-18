@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -67,7 +68,7 @@ public class ViewFileServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String userLogin = (String) session.getAttribute(SessionKeys.USER_LOGIN);
         String userRootDir = "/view/" + userLogin;
-        String currentPath = req.getRequestURI().substring(userRootDir.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDir.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
         if (! Files.exists(absolutePath)) {
             req.getRequestDispatcher("/WEB-INF/pages/errors/notFound.jsp").forward(req, resp);

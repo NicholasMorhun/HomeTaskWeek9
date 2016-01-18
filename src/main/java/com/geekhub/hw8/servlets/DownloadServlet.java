@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,7 +29,7 @@ public class DownloadServlet extends HttpServlet {
         HttpSession session = req.getSession();
         String userLogin = (String) session.getAttribute(SessionKeys.USER_LOGIN);
         String userRootDir = "/download/" + userLogin;
-        String currentPath = req.getRequestURI().substring(userRootDir.length());
+        String currentPath = URLDecoder.decode(req.getRequestURI(), "UTF-8").substring(userRootDir.length());
         Path absolutePath = Paths.get(PATH_TO_SANDBOX + userLogin + currentPath);
         String fileName = getFileNameFromPath(absolutePath);
         if (!Files.exists(absolutePath)) {

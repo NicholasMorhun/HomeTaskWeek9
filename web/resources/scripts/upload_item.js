@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     var createFolder = function() {
         var newFolderName = prompt("New folder:");
-        if (newFolderName !== undefined || newFolderName != "") {
+        if (newFolderName !== null && newFolderName != "") {
             var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "upload");
             window.location.href = url + '?name=' + newFolderName;
         }
