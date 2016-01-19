@@ -24,7 +24,7 @@
     </c:if>
     <c:forEach items="${files}" var="fileItem">
       <tr id="${fileItem.fileName}">
-        <td class="type_image_cell"><img class="fileico" src="/resources/images/fileico/${fileItem.fileExtension}.png"></td>
+        <td class="type_image_cell"><img class="fileico" src="/resources/images/fileico/${fileItem.fileExtension}.png" onerror="unknownExtension(this);"></td>
         <td class="filename_cell"><a href="${userRootDir}${currentPath}/${fileItem.fileName}<c:if test="${fileItem.isDirectory}">/?sort=${sortBy}&reverse=${reverseOrder}</c:if>">${fileItem.fileName}</a></td>
         <td class="filesize_cell">${fileItem.fileSize}</td>
         <td class="creation_date_cell">${fileItem.creationDateString}</td>

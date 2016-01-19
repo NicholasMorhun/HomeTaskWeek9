@@ -3,6 +3,12 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }
 
+function unknownExtension(image) {
+    image.onerror = "";
+    image.src = "/resources/images/fileico/unknown.png";
+    return true;
+}
+
 $(document).ready(function() {
     $('#' + getURLParameter('sort')).addClass('sort_by_it');
 });
