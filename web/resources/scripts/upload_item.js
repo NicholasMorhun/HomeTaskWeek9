@@ -5,7 +5,7 @@ $(document).ready(function() {
         var newFolderName = prompt("New folder:");
         if (newFolderName !== null && newFolderName != "") {
             var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "upload");
-            window.location.href = url + '?name=' + newFolderName;
+            window.location.href = url + '?name=' + encodeURIComponent(newFolderName);
         }
     };
     $("#add_folder_img").on("click", createFolder);

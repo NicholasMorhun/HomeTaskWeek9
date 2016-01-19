@@ -26,16 +26,16 @@ import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
 public class ViewFileServlet extends HttpServlet {
 
     private static final Set<String> PLAIN_TEXT = new HashSet<>(Arrays.asList(
-            "txt"
+            "txt","log"
     ));
     private static final Set<String> IMAGES = new HashSet<>(Arrays.asList(
             "bmp","jpg","jpeg","png","gif","ico"
     ));
     private static final Set<String> SOURCE_CODE = new HashSet<>(Arrays.asList(
-            "c","cpp","java","pas","js","php","py","pl","scala","sql","css","html","xml","sh"
+            "c","cpp","h","java","pas","js","php","py","pl","scala","sql","css","html","xml","sh"
     ));
     private static final Set<String> AUDIO = new HashSet<>(Arrays.asList(
-            "mp3","ogg","wav"
+            "mp3","ogg","wav","m4a"
     ));
 
     private static final Map<String, String> syntaxHighlighterBrushesNames = new HashMap<>();
@@ -44,6 +44,7 @@ public class ViewFileServlet extends HttpServlet {
     public void init() throws ServletException {
         syntaxHighlighterBrushesNames.put("c", "shBrushCpp");
         syntaxHighlighterBrushesNames.put("cpp", "shBrushCpp");
+        syntaxHighlighterBrushesNames.put("h", "shBrushCpp");
         syntaxHighlighterBrushesNames.put("java", "shBrushJava");
         syntaxHighlighterBrushesNames.put("pas", "shBrushDelphi");
         syntaxHighlighterBrushesNames.put("js", "shBrushJScript");

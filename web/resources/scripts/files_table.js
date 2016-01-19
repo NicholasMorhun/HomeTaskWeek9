@@ -30,14 +30,14 @@ $(document).ready(function() {
         var confirmation = confirm("You want to delete '" + itemId + "'. Are you sure?");
         if (confirmation) {
             var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "delete");
-            window.location.href = url + "?name=" + itemId;
+            window.location.href = url + "?name=" + encodeURIComponent(itemId);
         }
     };
     $(".delete_button").on("click", delete_item_function);
 
     var downloadItemFunction = function() {
         var item_id = $(this).attr('id').substring(9);
-        var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "download") + item_id;
+        var url = (location.protocol + '//' + location.host + location.pathname).replace(/storage/g, "download") + encodeURIComponent(item_id);
         window.open(url);
     };
     $(".download_button").on("click", downloadItemFunction);

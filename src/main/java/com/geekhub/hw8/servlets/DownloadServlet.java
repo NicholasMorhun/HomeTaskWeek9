@@ -40,7 +40,7 @@ public class DownloadServlet extends HttpServlet {
 
         if (Files.isDirectory(absolutePath)) {
             resp.setContentType("application/zip");
-            resp.setHeader("Content-disposition", "attachment; filename=" + fileName + ".zip");
+            resp.setHeader("Content-disposition", "attachment; filename=\"" + fileName + ".zip\"");
             processDownloadFolder(absolutePath, out);
         } else {
             String mimeType = getServletContext().getMimeType(fileName);
