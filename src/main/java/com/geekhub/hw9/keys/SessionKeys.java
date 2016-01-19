@@ -1,4 +1,4 @@
-package com.geekhub.hw8.keys;
+package com.geekhub.hw9.keys;
 
 /**
  * Contains names of sessions variables

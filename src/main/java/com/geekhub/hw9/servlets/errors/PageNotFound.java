@@ -1,4 +1,4 @@
-package com.geekhub.hw8.servlets.errors;
+package com.geekhub.hw9.servlets.errors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

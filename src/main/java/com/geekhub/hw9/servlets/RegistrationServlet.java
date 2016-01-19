@@ -1,7 +1,7 @@
-package com.geekhub.hw8.servlets;
+package com.geekhub.hw9.servlets;
 
-import com.geekhub.hw8.beans.CloudPocketUser;
-import com.geekhub.hw8.dao.UserDao;
+import com.geekhub.hw9.beans.CloudPocketUser;
+import com.geekhub.hw9.dao.UserDao;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -14,7 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
+import static com.geekhub.hw9.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {

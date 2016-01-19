@@ -1,7 +1,7 @@
-package com.geekhub.hw8.servlets;
+package com.geekhub.hw9.servlets;
 
-import com.geekhub.hw8.keys.SessionKeys;
-import com.geekhub.hw8.storage.FileInstance;
+import com.geekhub.hw9.keys.SessionKeys;
+import com.geekhub.hw9.storage.FileInstance;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
+import static com.geekhub.hw9.storage.RootDirectory.PATH_TO_SANDBOX;
 
 @WebServlet("/storage/*")
 public class ViewDirectoryContentServlet extends HttpServlet {

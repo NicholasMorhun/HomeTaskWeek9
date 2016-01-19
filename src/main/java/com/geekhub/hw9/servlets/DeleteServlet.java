@@ -1,6 +1,6 @@
-package com.geekhub.hw8.servlets;
+package com.geekhub.hw9.servlets;
 
-import com.geekhub.hw8.keys.SessionKeys;
+import com.geekhub.hw9.keys.SessionKeys;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -15,7 +15,7 @@ import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
+import static com.geekhub.hw9.storage.RootDirectory.PATH_TO_SANDBOX;
 
 /**
  * Deletes files and folders

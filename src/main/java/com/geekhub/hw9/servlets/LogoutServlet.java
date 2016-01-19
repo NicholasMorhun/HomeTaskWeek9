@@ -1,6 +1,6 @@
-package com.geekhub.hw8.servlets;
+package com.geekhub.hw9.servlets;
 
-import com.geekhub.hw8.keys.CookiesKeys;
+import com.geekhub.hw9.keys.CookiesKeys;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package com.geekhub.hw8.dao;
+package com.geekhub.hw9.dao;
 
 /**
  * Interface contains constants, which is necessary for using database

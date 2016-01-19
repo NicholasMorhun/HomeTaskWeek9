@@ -1,6 +1,6 @@
-package com.geekhub.hw8.servlets.errors;
+package com.geekhub.hw9.servlets.errors;
 
-import com.geekhub.hw8.keys.SessionKeys;
+import com.geekhub.hw9.keys.SessionKeys;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

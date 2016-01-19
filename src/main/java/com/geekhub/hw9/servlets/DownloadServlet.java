@@ -1,4 +1,4 @@
-package com.geekhub.hw8.servlets;
+package com.geekhub.hw9.servlets;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -13,10 +13,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.geekhub.hw8.keys.SessionKeys;
-import com.geekhub.hw8.utils.ZipUtils;
+import com.geekhub.hw9.keys.SessionKeys;
+import com.geekhub.hw9.utils.ZipUtils;
 
-import static com.geekhub.hw8.storage.RootDirectory.PATH_TO_SANDBOX;
+import static com.geekhub.hw9.storage.RootDirectory.PATH_TO_SANDBOX;
 
 /**
  * Allows to user download files

@@ -1,13 +1,11 @@
-package com.geekhub.hw8.dao;
+package com.geekhub.hw9.dao;
 
-import com.geekhub.hw8.beans.CloudPocketUser;
-import com.geekhub.hw8.utils.Utils;
-import com.mysql.jdbc.JDBC4Connection;
+import com.geekhub.hw9.beans.CloudPocketUser;
+import com.geekhub.hw9.utils.Utils;
 
 import java.sql.*;
-import java.util.Properties;
 
-import static com.geekhub.hw8.dao.DBInfo.*;
+import static com.geekhub.hw9.dao.DBInfo.*;
 
 /**
  * Class for working with
