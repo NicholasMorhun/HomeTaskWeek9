@@ -13,21 +13,7 @@
     <link href="/resources/lib/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
     <script src="/resources/lib/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            function loadContent() {
-                $.ajax({
-                    url: "${urlToFile}",
-                    async: false,
-                    success: function(result){
-                        $("#source_code").text(result);
-                    }});
-            }
-
-            loadContent();
-            SyntaxHighlighter.all();
-        });
-    </script>
+    <script src="/resources/scripts/source_code.jsp"></script>
 </head>
 <body>
     <pre id="source_code" class="brush: ${fileExt}"></pre>

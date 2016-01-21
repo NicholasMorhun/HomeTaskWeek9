@@ -14,7 +14,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-
     var sortByFunction = function(event) {
         var sortByValue = $(event.target).attr("id");
         if (sortByValue === undefined) {

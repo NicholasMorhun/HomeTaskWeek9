@@ -5,28 +5,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>HTML5 MediaElement</title>
+    <title>${fileName}</title>
 
     <script src="/resources/lib/jquery-2.1.4.min.js"></script>
 
     <script src="/resources/lib/johndyer-mediaelement/mediaelement-and-player.min.js"></script>
     <link rel="stylesheet" href="/resources/lib/johndyer-mediaelement/mediaelementplayer.min.css" />
 
-    <style>
-        body {
-            background-color: black;
-        }
-        #track_name {
-            display: block;
-            margin: 150px auto 50px;
-            text-align: center;
-            font-family: monospace;
-            font-size: 36px;
-            color: rgba(69, 69, 245, 1);
-            text-shadow: 0 0 10px blue;
-        }
-    </style>
-
+    <link rel="stylesheet" href="/resources/css/view_audio.css" />
 </head>
 <body>
 
@@ -36,7 +22,6 @@
              src="${urlToFile}" type="audio/${fileExt}" controls="controls">
       </audio>
   </div>
-
   <script>
     $('audio').mediaelementplayer();
   </script>
