@@ -8,7 +8,7 @@ import java.sql.*;
 import static com.geekhub.hw9.dao.DBInfo.*;
 
 /**
- * Class for working with
+ * Class for working with data storage
  */
 public class UserDao {
     private Connection connection = null;
